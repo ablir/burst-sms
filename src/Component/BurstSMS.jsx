@@ -6,7 +6,10 @@ export default class BurstSMS extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {mobileNum: ""};
+        this.state = {
+                        mobileNum: "",
+                        smsMessage: ""
+                     };
     }
 
     componentDidMount() {
@@ -25,18 +28,23 @@ export default class BurstSMS extends React.Component {
         this.setState({mobileNum: event.target.value});
     } 
 
+    smsMessageChanged = (event) => {
+        this.setState({smsMessage: event.target.value});
+    } 
+
     sendBurstSMS = () => {
-        BurstSMSAction.sendSMS("hello", "639989660644");
+        BurstSMSAction.sendSMS("hello", this.state.mobileNum);
     }
 
     render() {
         return (
             <div>
-                <label for="mobileNumID"> Mobile Number </label>
+                <label htmlFor="mobileNumID"> Mobile Number </label>
                 <input id="mobileNumID" type="text" placeholder="add mobile number" value={this.state.mobileNum} onChange={this.mobileNumChanged}/>
-                <textarea style={{display:"block"}}onChange={()=> {console.log("what");}}>
+                <br/>
+                <textarea maxLength="480" onChange={this.smsMessageChanged}>
                 </textarea>
-
+                <h5>{this.state.smsMessage.length}/480</h5>
                 <button onClick={this.sendBurstSMS}>Send Burst SMS </button> 
             </div>
         );
