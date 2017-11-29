@@ -33,7 +33,7 @@ export default class BurstSMS extends React.Component {
     } 
 
     sendBurstSMS = () => {
-        BurstSMSAction.sendSMS("hello", this.state.mobileNum);
+        BurstSMSAction.sendSMS(this.state.smsMessage, this.state.mobileNum);
     }
 
     render() {
